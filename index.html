@@ -7,19 +7,37 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>רשימת קניות משפחתית</h1>
   <div class="container">
-    <div class="input-group">
-      <input id="itemInput" type="text" placeholder="הוסיפי מוצר חדש..." />
-      <button onclick="addItem()">הוספה</button>
+
+    <h1>רשימת קניות משפחת שירזי</h1>
+
+    <div class="top-controls">
+      <button class="btn btn-danger" id="clearListBtn">השלמתי קנייה</button>
     </div>
+
+    <div class="input-group">
+      <input id="itemInput" type="text" placeholder="הוסיפי מוצר חדש..." autocomplete="off" />
+      <!-- <button class="btn btn-primary" onclick="addItem()">הוספה</button> -->
+       <button class="btn btn-primary" id="addItemBtn">הוספה</button>
+
+    </div>
+
     <ul id="shoppingList"></ul>
   </div>
 
-  <!-- Firebase SDKs - גרסה 8 -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
   <script src="app.js"></script>
+
+  <div id="confirmModal" class="modal hidden">
+    <div class="modal-content">
+      <p> בטוח שאת/ה רוצה למחוק את כל הרשימה?</p>
+      <div class="modal-buttons">
+        <button class="btn btn-danger" id="confirmYes">כן, מחק</button>
+        <button class="btn btn-secondary" id="confirmNo">לא</button>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

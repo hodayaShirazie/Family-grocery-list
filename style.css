@@ -1,4 +1,3 @@
-/* סגנונות כלליים */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: #f5f7fa;
@@ -9,110 +8,184 @@ body {
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
-}
-
-h1 {
-  margin-bottom: 20px;
-  color: #2c3e50;
+  direction: rtl;
 }
 
 .container {
   background: white;
-  padding: 20px 25px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 25px 30px;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
   width: 100%;
-  max-width: 400px;
+  max-width: 460px;
   box-sizing: border-box;
 }
 
-/* שורת הקלט והכפתור */
+h1 {
+  margin-bottom: 24px;
+  font-size: 2.4rem;
+  color: #2c3e50;
+  text-align: center;
+}
+
+.top-controls {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+
+.btn {
+  cursor: pointer;
+  border-radius: 12px;
+  padding: 12px 20px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border: none;
+  transition: background-color 0.25s ease;
+  user-select: none;
+}
+
+.btn-primary {
+  background-color: #3498db;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #2980b9;
+}
+
+.btn-danger {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #c0392b;
+}
+
+.btn-secondary {
+  background-color: #bdc3c7;
+  color: #2c3e50;
+}
+
+.btn-secondary:hover {
+  background-color: #95a5a6;
+}
+
 .input-group {
   display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 14px;
+  margin-bottom: 24px;
 }
 
 input#itemInput {
   flex-grow: 1;
-  padding: 10px 15px;
-  font-size: 1rem;
-  border-radius: 8px;
-  border: 1.5px solid #ccc;
-  transition: border-color 0.2s ease;
+  padding: 14px 18px;
+  font-size: 1.2rem;
+  border-radius: 12px;
+  border: 2px solid #ccc;
   outline-offset: 2px;
+  transition: border-color 0.25s ease;
   direction: rtl;
 }
+
 input#itemInput:focus {
   border-color: #3498db;
 }
 
-button {
-  padding: 0 18px;
-  background-color: #3498db;
-  border: none;
-  border-radius: 8px;
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  user-select: none;
-}
-button:hover {
-  background-color: #2980b9;
-}
-button:active {
-  background-color: #1c5980;
-}
-
-/* רשימת הפריטים */
 ul#shoppingList {
   list-style: none;
   padding: 0;
   margin: 0;
-  max-height: 350px;
+  max-height: 420px;
   overflow-y: auto;
 }
 
 ul#shoppingList li {
-  background: #e9f0fb;
-  margin-bottom: 10px;
-  padding: 12px 15px;
-  border-radius: 10px;
-  font-size: 1.1rem;
+  background: #ecf0f9;
+  margin-bottom: 14px;
+  padding: 14px 20px;
+  border-radius: 14px;
+  font-size: 1.3rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   user-select: none;
+  gap: 14px;
 }
 
-/* כפתור מחיקה */
-ul#shoppingList li button {
+/* כפתורי הפריט */
+.item-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.item-buttons button {
   background: transparent;
   border: none;
-  font-size: 1.3rem;
-  color: #e74c3c;
+  font-size: 1.4rem;
   cursor: pointer;
+  color: #34495e;
   transition: color 0.2s ease;
 }
-ul#shoppingList li button:hover {
+
+.item-buttons button:hover {
+  color: #2980b9;
+}
+
+.item-buttons .btn-delete {
+  color: #e74c3c;
+}
+
+.item-buttons .btn-delete:hover {
   color: #c0392b;
 }
 
-/* Responsive */
-@media (max-width: 480px) {
-  .container {
-    padding: 15px 20px;
-    max-width: 95vw;
-  }
-  input#itemInput {
-    font-size: 1rem;
-  }
-  ul#shoppingList li {
-    font-size: 1rem;
-  }
-  button {
-    font-size: 1rem;
-    padding: 0 14px;
-  }
+/* מצב עריכה */
+li.editing {
+  background: #d0e6fb;
+}
+
+li.editing input.edit-input {
+  flex-grow: 1;
+  font-size: 1.3rem;
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: 2px solid #3498db;
+  outline-offset: 2px;
+}
+
+/* מודל חלון אישור */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.35);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: white;
+  padding: 28px 36px;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  max-width: 320px;
+  text-align: center;
+  font-size: 1.3rem;
+  color: #333;
+}
+
+.modal-buttons {
+  margin-top: 24px;
+  display: flex;
+  justify-content: space-around;
 }
