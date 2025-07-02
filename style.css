@@ -1,0 +1,118 @@
+/* סגנונות כלליים */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f5f7fa;
+  margin: 0;
+  padding: 20px;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+h1 {
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+.container {
+  background: white;
+  padding: 20px 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+}
+
+/* שורת הקלט והכפתור */
+.input-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+input#itemInput {
+  flex-grow: 1;
+  padding: 10px 15px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1.5px solid #ccc;
+  transition: border-color 0.2s ease;
+  outline-offset: 2px;
+  direction: rtl;
+}
+input#itemInput:focus {
+  border-color: #3498db;
+}
+
+button {
+  padding: 0 18px;
+  background-color: #3498db;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  user-select: none;
+}
+button:hover {
+  background-color: #2980b9;
+}
+button:active {
+  background-color: #1c5980;
+}
+
+/* רשימת הפריטים */
+ul#shoppingList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 350px;
+  overflow-y: auto;
+}
+
+ul#shoppingList li {
+  background: #e9f0fb;
+  margin-bottom: 10px;
+  padding: 12px 15px;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+}
+
+/* כפתור מחיקה */
+ul#shoppingList li button {
+  background: transparent;
+  border: none;
+  font-size: 1.3rem;
+  color: #e74c3c;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+ul#shoppingList li button:hover {
+  color: #c0392b;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .container {
+    padding: 15px 20px;
+    max-width: 95vw;
+  }
+  input#itemInput {
+    font-size: 1rem;
+  }
+  ul#shoppingList li {
+    font-size: 1rem;
+  }
+  button {
+    font-size: 1rem;
+    padding: 0 14px;
+  }
+}

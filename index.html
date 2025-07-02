@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>רשימת קניות משפחתית</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>רשימת קניות משפחתית</h1>
+  <div class="container">
+    <div class="input-group">
+      <input id="itemInput" type="text" placeholder="הוסיפי מוצר חדש..." />
+      <button onclick="addItem()">הוספה</button>
+    </div>
+    <ul id="shoppingList"></ul>
+  </div>
+
+  <!-- Firebase SDKs - גרסה 8 -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+  <script src="app.js"></script>
+</body>
+</html>
