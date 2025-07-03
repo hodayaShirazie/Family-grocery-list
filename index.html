@@ -3,41 +3,37 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>רשימת קניות משפחתית</title>
+  <title>קניות</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
+    <h1> שירזי קניות בע"מ</h1>
 
-    <h1>רשימת קניות משפחת שירזי</h1>
+    <button id="clearListBtn" title="השלמת קנייה">השלמתי קנייה</button>
 
-    <div class="top-controls">
-      <button class="btn btn-danger" id="clearListBtn">השלמתי קנייה</button>
+    <div id="confirmInline" class="confirm-inline hidden">
+      <span>למחוק את כל הפריטים?</span>
+      <button id="confirmYes">כן</button>
+      <button id="confirmNo">לא</button>
     </div>
 
     <div class="input-group">
-      <input id="itemInput" type="text" placeholder="הוסיפי מוצר חדש..." autocomplete="off" />
-      <!-- <button class="btn btn-primary" onclick="addItem()">הוספה</button> -->
-       <button class="btn btn-primary" id="addItemBtn">הוספה</button>
-
+      <input id="itemInput" type="text" placeholder="הוסיפי מוצר חדש..." />
+      <button id="addItemBtn" class="btn-primary">הוספה</button>
     </div>
 
-    <ul id="shoppingList"></ul>
+    <div id="errorInline" class="error-inline hidden">
+      נא להזין מוצר לפני ההוספה
+    </div>
+
+    <ul id="shoppingList" class="shopping-list"></ul>
   </div>
 
+  <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
-
+  
   <script src="app.js"></script>
-
-  <div id="confirmModal" class="modal hidden">
-    <div class="modal-content">
-      <p> בטוח שאת/ה רוצה למחוק את כל הרשימה?</p>
-      <div class="modal-buttons">
-        <button class="btn btn-danger" id="confirmYes">כן, מחק</button>
-        <button class="btn btn-secondary" id="confirmNo">לא</button>
-      </div>
-    </div>
-  </div>
 </body>
 </html>

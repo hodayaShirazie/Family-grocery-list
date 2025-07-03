@@ -1,191 +1,229 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+
+
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #f5f7fa;
+  font-family: 'Rubik', sans-serif;
+  background: #f4f7fa;
   margin: 0;
-  padding: 20px;
-  color: #333;
+  padding: 32px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: center;
+  align-items: flex-start;
   min-height: 100vh;
-  direction: rtl;
+  color: #2c3e50;
 }
 
 .container {
-  background: white;
-  padding: 25px 30px;
-  border-radius: 16px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  padding: 32px;
   width: 100%;
-  max-width: 460px;
+  max-width: 480px;
   box-sizing: border-box;
 }
 
 h1 {
   margin-bottom: 24px;
-  font-size: 2.4rem;
-  color: #2c3e50;
+  font-size: 2rem;
   text-align: center;
+  color: #34495e;
 }
 
-.top-controls {
-  display: flex;
-  justify-content: flex-start;
+/* כפתור השלמת קנייה אדום למעלה */
+#clearListBtn {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  font-size: 1.1rem;
   margin-bottom: 20px;
 }
+#clearListBtn:hover {
+  background-color: #c0392b;
+}
 
-.btn {
+/* אישור אינליין - מוסתר כברירת מחדל */
+.confirm-inline {
+  display: none;
+  background: #fff3f3;
+  border: 1.5px solid #e74c3c;
+  border-radius: 14px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  color: #c0392b;
+  font-weight: 600;
+  text-align: center;
+  user-select: none;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  align-items: center;
+}
+.confirm-inline.show {
+  display: flex;
+}
+.confirm-inline button {
   cursor: pointer;
-  border-radius: 12px;
-  padding: 12px 20px;
-  font-weight: 700;
-  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 10px;
   border: none;
+  padding: 8px 16px;
+  font-size: 1rem;
   transition: background-color 0.25s ease;
   user-select: none;
+}
+#confirmYes {
+  background-color: #e74c3c;
+  color: white;
+}
+#confirmYes:hover {
+  background-color: #c0392b;
+}
+#confirmNo {
+  background-color: #bdc3c7;
+  color: #2c3e50;
+}
+#confirmNo:hover {
+  background-color: #95a5a6;
+}
+
+/* הודעת שגיאה אינליין */
+.error-inline {
+  display: none;
+  background: #fff5f5;
+  border: 1.5px solid #e74c3c;
+  border-radius: 14px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  color: #e74c3c;
+  font-weight: 600;
+  text-align: center;
+  user-select: none;
+}
+.error-inline.show {
+  display: block;
+}
+
+.input-group {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+  flex-direction: row-reverse;
+}
+
+.input-group input {
+  flex-grow: 1;
+  padding: 12px 16px;
+  font-size: 1rem;
+  border-radius: 12px;
+  border: 2px solid #ccc;
+  transition: border-color 0.3s ease;
+  direction: rtl;
+}
+
+.input-group input:focus {
+  border-color: #3498db;
+  outline: none;
 }
 
 .btn-primary {
   background-color: #3498db;
   color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 18px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
 }
-
 .btn-primary:hover {
   background-color: #2980b9;
 }
 
-.btn-danger {
-  background-color: #e74c3c;
-  color: white;
-}
-
-.btn-danger:hover {
-  background-color: #c0392b;
-}
-
-.btn-secondary {
-  background-color: #bdc3c7;
-  color: #2c3e50;
-}
-
-.btn-secondary:hover {
-  background-color: #95a5a6;
-}
-
-.input-group {
-  display: flex;
-  gap: 14px;
-  margin-bottom: 24px;
-}
-
-input#itemInput {
-  flex-grow: 1;
-  padding: 14px 18px;
-  font-size: 1.2rem;
-  border-radius: 12px;
-  border: 2px solid #ccc;
-  outline-offset: 2px;
-  transition: border-color 0.25s ease;
-  direction: rtl;
-}
-
-input#itemInput:focus {
-  border-color: #3498db;
-}
-
-ul#shoppingList {
+.shopping-list {
   list-style: none;
   padding: 0;
   margin: 0;
-  max-height: 420px;
-  overflow-y: auto;
 }
 
-ul#shoppingList li {
-  background: #ecf0f9;
-  margin-bottom: 14px;
-  padding: 14px 20px;
+.shopping-item {
+  background: #fefefe;
   border-radius: 14px;
-  font-size: 1.3rem;
+  padding: 14px 20px;
+  margin-bottom: 12px;
+  font-size: 1.1rem;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  user-select: none;
-  gap: 14px;
+  justify-content: space-between;
+  direction: rtl;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  transition: background-color 0.3s ease;
 }
 
-/* כפתורי הפריט */
+.shopping-item:hover {
+  background-color: #f1f8ff;
+}
+
+.item-name {
+  flex-grow: 1;
+  text-align: right;
+  user-select: none;
+}
+
 .item-buttons {
   display: flex;
   gap: 12px;
+  align-items: center;
 }
 
-.item-buttons button {
-  background: transparent;
+/* כפתורי אייקונים מינימליסטיים SVG */
+.btn-icon {
+  background: none;
   border: none;
-  font-size: 1.4rem;
   cursor: pointer;
-  color: #34495e;
-  transition: color 0.2s ease;
-}
-
-.item-buttons button:hover {
-  color: #2980b9;
-}
-
-.item-buttons .btn-delete {
-  color: #e74c3c;
-}
-
-.item-buttons .btn-delete:hover {
-  color: #c0392b;
-}
-
-/* מצב עריכה */
-li.editing {
-  background: #d0e6fb;
-}
-
-li.editing input.edit-input {
-  flex-grow: 1;
-  font-size: 1.3rem;
-  padding: 10px 15px;
-  border-radius: 10px;
-  border: 2px solid #3498db;
-  outline-offset: 2px;
-}
-
-/* מודל חלון אישור */
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0,0,0,0.35);
+  padding: 6px;
+  width: 32px;
+  height: 32px;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  transition: transform 0.15s ease, fill 0.25s ease;
+  fill: #34495e;
+}
+.btn-icon:hover {
+  fill: #2980b9;
+  transform: scale(1.1);
+}
+.btn-delete {
+  fill: #e74c3c;
+}
+.btn-delete:hover {
+  fill: #c0392b;
 }
 
-.modal.hidden {
-  display: none;
+.edit-input {
+  flex-grow: 1;
+  padding: 10px 14px;
+  font-size: 1.1rem;
+  border-radius: 12px;
+  border: 2px solid #3498db;
+  outline: none;
+  direction: rtl;
 }
 
-.modal-content {
-  background: white;
-  padding: 28px 36px;
-  border-radius: 16px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-  max-width: 320px;
-  text-align: center;
-  font-size: 1.3rem;
-  color: #333;
+.confirm-inline.hidden {
+  display: none !important;
 }
 
-.modal-buttons {
-  margin-top: 24px;
-  display: flex;
-  justify-content: space-around;
+.confirm-inline.show {
+  display: flex !important;
 }
+
+
