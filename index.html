@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
+  <link rel="icon" href="images/empty-cart-icon.svg" type="image/x-icon" />
+
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>קניות</title>
+  <title>שירזי קניות</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
-    <h1> שירזי קניות בע"מ</h1>
+    <h1>שירזי קניות בע"מ</h1>
 
     <button id="clearListBtn" title="השלמת קנייה">השלמתי קנייה</button>
 
@@ -17,6 +20,13 @@
       <button id="confirmYes">כן</button>
       <button id="confirmNo">לא</button>
     </div>
+
+    <div id="confirmDeleteItem" class="confirm-inline hidden">
+      <span>למחוק את המוצר הזה?</span>
+      <button id="deleteItemYes" class="btn-danger">כן</button>
+      <button id="deleteItemNo" class="btn-neutral">לא</button>
+    </div>
+
 
     <div class="input-group">
       <input id="itemInput" type="text" placeholder="הוסיפי מוצר חדש..." />

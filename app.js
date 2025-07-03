@@ -1,5 +1,5 @@
 window.onload = () => {
-  console.log("האפליקציה נטענה");
+
   const firebaseConfig = {
     apiKey: "AIzaSyB6RkG3YQAUBXE7_VTGnraVZ12-Lu8wsLk",
     authDomain: "shoppinglistapp-ba3f6.firebaseapp.com",
@@ -12,7 +12,6 @@ window.onload = () => {
   };
   firebase.initializeApp(firebaseConfig);
   const db = firebase.database();
-
   const shoppingListRef = db.ref("shoppingList");
 
   const input = document.getElementById("itemInput");
@@ -23,43 +22,37 @@ window.onload = () => {
   const confirmNo = document.getElementById("confirmNo");
   const errorInline = document.getElementById("errorInline");
 
-  document.getElementById("addItemBtn").addEventListener("click", addItem);
+  const confirmDeleteItem = document.getElementById("confirmDeleteItem");
+  const deleteItemYes = document.getElementById("deleteItemYes");
+  const deleteItemNo = document.getElementById("deleteItemNo");
 
-  let editingKey = null; 
+  let editingKey = null;
   let lastSnapshot = null;
+  let itemToDeleteKey = null;
+
+  document.getElementById("addItemBtn").addEventListener("click", addItem);
 
   function addItem() {
     const item = input.value.trim();
     if (!item) {
       errorInline.classList.add("show");
       input.focus();
-
-      setTimeout(() => {
-        errorInline.classList.remove("show");
-      }, 3000);
-
+      setTimeout(() => errorInline.classList.remove("show"), 3000);
       const clearError = () => {
         errorInline.classList.remove("show");
         input.removeEventListener("input", clearError);
       };
       input.addEventListener("input", clearError);
-
       return;
     }
-
     errorInline.classList.remove("show");
     shoppingListRef.push({ name: item, bought: false });
     input.value = "";
     input.focus();
   }
 
-  function deleteItem(key) {
-    shoppingListRef.child(key).remove();
-  }
-
   function editItem(key, currentName, li) {
-    if (editingKey !== null) return; 
-
+    if (editingKey !== null) return;
     editingKey = key;
     li.classList.add("editing");
     li.innerHTML = "";
@@ -70,12 +63,11 @@ window.onload = () => {
     editInput.value = currentName;
     li.appendChild(editInput);
 
-    // כפתור שמירה (SVG)
     const saveBtn = document.createElement("button");
     saveBtn.className = "btn-icon";
     saveBtn.title = "שמור";
     saveBtn.innerHTML = `
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
         <polyline points="20 6 9 17 4 12" />
       </svg>`;
     saveBtn.onclick = () => {
@@ -91,12 +83,11 @@ window.onload = () => {
     };
     li.appendChild(saveBtn);
 
-    // כפתור ביטול (SVG)
     const cancelBtn = document.createElement("button");
     cancelBtn.className = "btn-icon btn-delete";
     cancelBtn.title = "בטל";
     cancelBtn.innerHTML = `
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
         <line x1="18" y1="6" x2="6" y2="18"/>
         <line x1="6" y1="6" x2="18" y2="18"/>
       </svg>`;
@@ -107,7 +98,6 @@ window.onload = () => {
     li.appendChild(cancelBtn);
 
     editInput.focus();
-
     editInput.addEventListener("keyup", e => {
       if (e.key === "Enter") saveBtn.onclick();
       else if (e.key === "Escape") cancelBtn.onclick();
@@ -136,27 +126,29 @@ window.onload = () => {
         const btns = document.createElement("div");
         btns.className = "item-buttons";
 
-        // כפתור עריכה (עט SVG מינימליסטי)
         const editBtn = document.createElement("button");
         editBtn.className = "btn-icon";
         editBtn.title = "ערוך מוצר";
         editBtn.innerHTML = `
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <path d="M12 20h9" />
             <path d="M16.5 3.5a2.121 2.121 0 1 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>
           </svg>`;
         editBtn.onclick = () => editItem(key, item.name, li);
 
-        // כפתור מחיקה (X SVG מינימליסטי אדום)
         const delBtn = document.createElement("button");
         delBtn.className = "btn-icon btn-delete";
         delBtn.title = "מחק מוצר";
         delBtn.innerHTML = `
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
             <line x1="18" y1="6" x2="6" y2="18"/>
             <line x1="6" y1="6" x2="18" y2="18"/>
           </svg>`;
-        delBtn.onclick = () => deleteItem(key);
+        delBtn.onclick = () => {
+          itemToDeleteKey = key;
+          confirmDeleteItem.classList.remove("hidden");
+          confirmDeleteItem.classList.add("show");
+        };
 
         btns.appendChild(editBtn);
         btns.appendChild(delBtn);
@@ -177,6 +169,21 @@ window.onload = () => {
 
   confirmNo.onclick = () => {
     confirmInline.classList.remove("show");
+  };
+
+  deleteItemYes.onclick = () => {
+    if (itemToDeleteKey) {
+      shoppingListRef.child(itemToDeleteKey).remove();
+      itemToDeleteKey = null;
+    }
+    confirmDeleteItem.classList.remove("show");
+    confirmDeleteItem.classList.add("hidden");
+  };
+
+  deleteItemNo.onclick = () => {
+    itemToDeleteKey = null;
+    confirmDeleteItem.classList.remove("show");
+    confirmDeleteItem.classList.add("hidden");
   };
 
   shoppingListRef.on("value", renderList);
